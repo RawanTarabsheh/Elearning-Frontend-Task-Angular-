@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { ApiService } from '../../services/api';
+import { LangService } from '../../services/lang';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ import { ApiService } from '../../services/api';
 })
 export class HomeComponent implements OnInit {
   private api = inject(ApiService);
+lang = inject(LangService);
 
   news: any[] = [];
   testimonials: any[] = [];
@@ -39,4 +41,13 @@ export class HomeComponent implements OnInit {
       console.log('LOADING FALSE ✅', { news: this.news.length, testimonials: this.testimonials.length });
     }
   }
+  formatDate(dateStr?: string) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const yyyy = d.getFullYear();
+  return `${dd}.${mm}.${yyyy}`;
+}
+
 }

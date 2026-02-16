@@ -1,29 +1,200 @@
-<div class="page">
-  <h2>Home</h2>
+<section class="hero-wrap">
+  <div class="container">
+    <div class="hero card">
+      <div class="hero__grid">
+        
 
-  <div *ngIf="loading" class="muted">Loading...</div>
-  <div *ngIf="!loading && errorMsg" class="alert error">{{ errorMsg }}</div>
+        <div class="hero__content">
+          <h1 class="hero__title">تعلم، تقدم، سر نحو العلى</h1>
+          <p class="hero__subtitle">
+            مع أفضل المعلمين والمدرسين المختصين<br />
+            بالمواد والمناهج
+          </p>
 
-  <ng-container *ngIf="!loading && !errorMsg">
-    <section class="card">
-      <h3>Latest News</h3>
-      <div *ngIf="news.length === 0" class="muted">No news yet.</div>
-
-      <div class="list" *ngFor="let n of news">
-        <div class="title">{{ n.title_en }} / {{ n.title_ar }}</div>
-        <div class="muted">{{ n.content_en }}</div>
+          <button class=" btn-gradient" type="button">
+            ابدأ تجربتك المجانية الآن
+          </button>
+        </div>
+        <div class="hero__media">
+          <img src="assets/images/boy.png" alt="Hero" class="hero__img" />
+        </div>
       </div>
-    </section>
 
-    <section class="card" style="margin-top: 12px;">
-      <h3>Testimonials</h3>
-      <div *ngIf="testimonials.length === 0" class="muted">No testimonials yet.</div>
-
-      <div class="list" *ngFor="let t of testimonials">
-        <div class="title">{{ t.name_en }} / {{ t.name_ar }}</div>
-        <div class="muted">{{ t.title_en }} / {{ t.title_ar }}</div>
-        <div>{{ t.content_en }}</div>
+      <!-- dots: bottom center inside hero -->
+      <div class="hero__dots" aria-hidden="true">
+        <span class="dot dot--active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
       </div>
-    </section>
-  </ng-container>
-</div>
+    </div>
+  </div>
+</section>
+
+
+<section class="subjects">
+  <div class="container sub_heading">
+    <h2 class="section__title">
+      {{ lang.lang === 'ar' ? 'المراحل الدراسية' : 'Academic Levels' }}
+    </h2>
+    <p class="section__desc">
+      {{ lang.lang === 'ar'
+        ? 'مدخلك المثالي لاستكشاف عوالم المعرفة والتحصيل الأكاديمي'
+        : 'Your ideal gateway to explore knowledge and academic achievement.' }}
+    </p>
+
+    <div class="subjects__grid">
+      <!-- card 1 -->
+      <div class="subject-card">
+        <img class="subject-card__img" src="assets\images\High School Stage.png" alt="High School" />
+        <div class="subject-card__label">
+          {{ lang.lang === 'ar' ? 'المرحلة الثانوية' : 'High School' }}
+        </div>
+      </div>
+
+      <!-- card 2 -->
+      <div class="subject-card">
+        <img class="subject-card__img" src="assets\images\Middle School Stage.png" alt="Middle School" />
+        <div class="subject-card__label">
+          {{ lang.lang === 'ar' ? 'المرحلة الإعدادية' : 'Middle School' }}
+        </div>
+      </div>
+
+      <!-- card 3 -->
+      <div class="subject-card">
+        <img class="subject-card__img" src="assets/images/Preparatory Stage.png" alt="Primary School" />
+        <div class="subject-card__label">
+          {{ lang.lang === 'ar' ? 'المرحلة الابتدائية' : 'Primary School' }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials-wrap">
+  <div class="container">
+    <div class="testimonials-box">
+      <h2 class="heading_one">
+        {{ lang.lang === 'ar' ? 'شهادات ملهمة' : 'Testimonials' }}
+      </h2>
+      <p class="testi__desc">
+        {{ lang.lang === 'ar'
+          ? 'تجارب حقيقية وقصص ملهمة، تعرف على مسيرة طلابنا'
+          : 'Real experiences and inspiring stories from our students.' }}
+      </p>
+
+      <div *ngIf="loading" class="muted center">Loading...</div>
+
+      <div class="testi__grid" *ngIf="!loading">
+        <div class="testi-card" *ngFor="let t of testimonials | slice:0:3; let i = index">
+          <div class="testi-quote" [ngClass]="'q' + i">“</div>
+
+          <div class="testi-content">
+            {{ lang.lang === 'ar' ? t.content_ar : t.content_en }}
+          </div>
+
+          <div class="testi-footer">
+            <div class="testi-meta">
+              <div class="testi-name">{{ lang.lang === 'ar' ? t.name_ar : t.name_en }}</div>
+              <div class="testi-sub muted">
+                {{ lang.lang === 'ar' ? t.title_ar : t.title_en }}
+              </div>
+            </div>
+
+            <div class="testi-avatar">
+                 <img  [src]="'assets/images/t'+i+'.png'" alt="avatar" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-nav">
+          <div class="arrow">→</div>
+        <div class="dots">
+          <span class="dot dot--active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+
+      </div>
+
+      <div class="center" style="margin-top: 36px;">
+        <button class="btn-gradient" type="button">
+          {{ lang.lang === 'ar' ? 'ابدأ تجربتك المجانية الآن' : 'Start your free trial now' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partners">
+  <div class="container">
+
+    <h2 class="partners__title">
+      {{ lang.lang === 'ar'
+        ? 'شركاؤنا في بناء الثقة والنجاح'
+        : 'Our Partners in Success' }}
+    </h2>
+
+    <div class="partners__grid">
+      <div class="partner" *ngFor="let p of [1,2,3,4,5,6]">
+        <img src="assets/images/logo.png" alt="partner" />
+        <span>
+          {{ lang.lang === 'ar' ? 'اسم الشريك' : 'Partner Name' }}
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="news-sec">
+  <div class="container">
+    <h2 class="news-sec__title">
+      {{ lang.lang === 'ar' ? 'أخبارنا' : 'News' }}
+    </h2>
+
+    <div *ngIf="loading" class="muted center">Loading...</div>
+
+    <div class="news-grid" *ngIf="!loading">
+      <article class="news-card" *ngFor="let n of news | slice:0:2">
+        <div class="news-img">
+          <img
+            [src]="n.image ?? 'assets/images/Preparatory Stage (4).png'"
+            alt="news"
+          />
+        </div>
+
+        <div class="news-body">
+          <div class="news-date">
+            <span class="cal">
+                 <img
+            [src]="n.image ?? 'assets/images/Calendar4Week.png'"
+            alt="date"
+             />
+            </span>
+             <span>{{ formatDate(n.published_at ?? n.created_at) }}</span>
+
+          </div>
+
+          <h3 class="news-title">
+            {{ lang.lang === 'ar' ? n.title_ar : n.title_en }}
+          </h3>
+
+          <p class="news-desc">
+            {{ lang.lang === 'ar' ? n.content_ar : n.content_en }}
+          </p>
+
+          <a class="news-link" href="#" (click)="$event.preventDefault()">
+            {{ lang.lang === 'ar' ? 'عرض الخبر' : 'View News' }}
+            <span class="arrow">›</span>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+

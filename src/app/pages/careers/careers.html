@@ -1,65 +1,153 @@
-<div class="page">
-  <h2>Careers</h2>
-  <p class="muted">Submit your application and upload your CV.</p>
 
-  <div *ngIf="successMsg" class="alert success">{{ successMsg }}</div>
-  <div *ngIf="errorMsg" class="alert error">{{ errorMsg }}</div>
+<div class="careers-page">
 
-<form [formGroup]="form" (ngSubmit)="submit()" class="card">
-    <div class="grid">
-      <div class="field">
-        <label>Job *</label>
-        <select [formControl]="form.controls.job">
-          <option value="">-- Select --</option>
-          <option *ngFor="let j of jobs" [value]="j">{{ j }}</option>
-        </select>
-        <small *ngIf="isInvalid('job')">Job is required.</small>
+  <!-- Banner -->
+  <section class="careers-hero">
+    <div class="careers-hero__inner">
+      <h1>انضم إلى فريق معلمينا</h1>
+      <p>
+نحن منصة أكاديمية متخصصة في تقديم الدورات التدريبية والتعليمية عبر الإنترنت، نهدف إلى جعل التعلم متاحًا وسهلًا للجميع. نركز على جودة المحتوى وتنوعه ليغطي مختلف المجالات الأكاديمية والعملية، مع اعتماد أساليب تفاعلية تساعد المتعلم على التطبيق الفعلي لما يدرسه.       </p>
+    </div>
+  </section>
+
+
+<!--  -->
+<section class="contact-sec">
+  <div class="container contact-grid">
+
+    <div class="contact-form-card">
+      <div class="contact-form-head">
+        <h2>نموذج الاتصال</h2>
+        <small>جميع المعلومات مطلوبة</small>
       </div>
 
-      <div class="field">
-        <label>Years of Experience *</label>
-        <select [formControl]="form.controls.years_of_experience">
-          <option value="">-- Select --</option>
-          <option *ngFor="let y of experienceOptions" [value]="y">{{ y }}</option>
-        </select>
-        <small *ngIf="isInvalid('years_of_experience')">This field is required.</small>
-      </div>
+<form [formGroup]="form" (ngSubmit)="submit()" class="contact-form">
 
-      <div class="field">
-        <label>Major *</label>
-        <select [formControl]="form.controls.major_id" [disabled]="loadingMajors">
-          <option value="">{{ loadingMajors ? 'Loading...' : '-- Select --' }}</option>
-          <option *ngFor="let m of majors" [value]="m.id">
-            {{ m.name_en }} / {{ m.name_ar }}
-          </option>
-        </select>
-        <small *ngIf="isInvalid('major_id')">Major is required.</small>
-      </div>
+        <div class="row row-1">
+          <div class="field">
+            <label>اختر الوظيفة</label>
+            <select [formControl]="form.controls.job" style="width: 50%;">
+              <option value="">اختر الوظيفة</option>
+              <option value="teacher">معلم</option>
+               <option *ngFor="let j of jobs" [value]="j">{{ j }}</option>
+            </select>
+            <small class="err" *ngIf="isInvalid('job')">هذا الحقل مطلوب</small>
+          </div>
+        </div>
 
-      <div class="field">
-        <label>Name *</label>
-        <input type="text" [formControl]="form.controls.name" placeholder="Your full name" />
-        <small *ngIf="isInvalid('name')">Name is required.</small>
-      </div>
+        <div class="row row-2">
+          <div class="field">
+            <label>التخصص</label>
+            <select [formControl]="form.controls.major_id" [disabled]="loadingMajors">
+              <option value="">
+                {{ loadingMajors ? 'Loading…' : 'اختر التخصص' }}
+              </option>
+              <option *ngFor="let m of majors" [value]="m.id">
+                {{ m.name_ar }}
+              </option>
+            </select>
+            <small class="err" *ngIf="isInvalid('major_id')">هذا الحقل مطلوب</small>
+          </div>
+           <div class="field">
+            <label>عدد سنوات الخبرة</label>
+            <select [formControl]="form.controls.years_of_experience">
+              <option value="">اختر عدد السنوات</option>
+             <option *ngFor="let y of experienceOptions" [value]="y">{{ y }}</option>
+            </select>
+            <small class="err" *ngIf="isInvalid('years_of_experience')">هذا الحقل مطلوب</small>
+          </div>
+        </div>
 
-      <div class="field">
-        <label>Phone *</label>
-        <input type="text" [formControl]="form.controls.phone" placeholder="079..." />
-        <small *ngIf="isInvalid('phone')">Phone is required.</small>
-      </div>
+        
 
-      <div class="field">
-        <label>CV (PDF/DOC/DOCX) *</label>
-        <input type="file" (change)="onFileChange($event)" accept=".pdf,.doc,.docx" />
-        <small *ngIf="!selectedFile">Please attach a CV file.</small>
+        <div class="row row-1">
+          <div class="field">
+            <label>الاسم الكامل باللغة العربية</label>
+            <input type="text" [formControl]="form.controls.name" placeholder="عبدالله" />
+            <small class="err" *ngIf="isInvalid('name')">هذا الحقل مطلوب</small>
+          </div>
+        </div>
+
+        <div class="row row-1">
+          <div class="field">
+            <label>رقم الموبايل</label>
+
+            <div class="phone-wrap">
+              <img class="flag" src="assets/images/flag.png" alt="flag" />
+              <span class="code">+974</span>
+              <input type="text" [formControl]="form.controls.phone" placeholder="XXXXXXXXXXXX" />
+            </div>
+
+            <small class="err" *ngIf="isInvalid('phone')">هذا الحقل مطلوب</small>
+          </div>
+        </div>
+
+        <div class="row row-1">
+          <div class="field">
+            <label>البريد الالكتروني</label>
+            <input type="email" [formControl]="form.controls.email" placeholder="ادخل البريد الالكتروني" />
+            <small class="err" *ngIf="isInvalid('email')">هذا الحقل مطلوب</small>
+          </div>
+        </div>
+
+        <div class="row row-1">
+          <div class="field">
+            <label>السيرة الذاتية</label>
+
+            <label class="upload-btn">
+              <input type="file" (change)="onFileChange($event)" accept=".pdf,.doc,.docx" hidden />
+              <span class="upload-ic">⤴</span>
+              تحميل
+            </label>
+
+            <small class="err" *ngIf="!selectedFile">يرجى إرفاق السيرة الذاتية</small>
         <small *ngIf="selectedFile">Selected: {{ selectedFile.name }}</small>
-      </div>
+          </div>
+        </div>
+        <div>
+        <div class="alert success" *ngIf="successMsg">{{ successMsg }}</div>
+        <div class="alert error" *ngIf="errorMsg">{{ errorMsg }}</div>
+        </div>
+        <div class="actions">          
+          <button type="submit" [disabled]="submitting">
+            {{ submitting ? 'جارٍ الإرسال...' : 'أرسل' }}
+          </button>
+        </div>
+      </form>
     </div>
 
-    <div class="actions">
-      <button type="submit" [disabled]="submitting">
-        {{ submitting ? 'Submitting...' : 'Submit' }}
-      </button>
-    </div>
-  </form>
+    <aside class="contact-info-card">
+      <h2>معلومات التواصل</h2>
+
+      <ul class="info-list">
+        <li>
+          <span>support@domain.com</span>
+          <img src="assets/images/email.png" alt="" />
+        </li>
+        <li>
+          <span>+9-xxx-xxx-xxxx</span>
+          <img src="assets/images/phone.png" alt="" />
+        </li>
+        <li>
+            <span>الأردن - عمان</span>
+          <img src="assets/images/pin.png" alt="" />
+        </li>
+        <li>
+            <span>9:00 - 17:00 من الأحد الى الخميس</span>
+          <img src="assets/images/watch.png" alt="" />
+        </li>
+        <li>
+          <a href="#">خريطة الموقع اضغط هنا</a>
+          <img src="assets/images/map.png" alt="" />
+        </li>
+      </ul>
+
+      <div class="watermark"></div>
+    </aside>
+
+  </div>
+</section>
+
+  <!--  -->
+
 </div>

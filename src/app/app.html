@@ -1,6 +1,99 @@
-<nav style="display:flex; gap:12px; padding:12px; border-bottom:1px solid #eee;">
-  <a routerLink="/">Home</a>
-  <a routerLink="/careers">Careers</a>
-</nav>
+<header class="header">
+  <div class="container header__inner">
+
+    <div class="header__logo"> 
+            <img src="assets/images/hlogo.png" alt="logo" />
+</div>
+
+    <nav class="header__nav">
+      <a class="active" href="#">الرئيسية</a>
+      <a href="#">المواد</a>
+      <a href="#">المعلمون</a>
+      <a href="#">من نحن</a>
+      <a routerLink="/careers">تواصل معنا</a>
+    </nav>
+
+    <div class="header__actions">
+            <a class="btn-primary" href="#"> 
+        {{ lang.lang === 'ar' ? 'سجل الان' : 'Register' }}
+            </a>
+ <a class="link" href="#"> 
+        {{ lang.lang === 'ar' ? ' دخول' : 'Login' }}
+            </a>
+      <a class="link" type="button" (click)="lang.toggle()">
+        {{ lang.lang === 'en' ? 'العربية' : 'English' }}
+      </a>
+    </div>
+
+  </div>
+</header>
 
 <router-outlet></router-outlet>
+
+<footer class="footer">
+  <div class="container footer__grid">
+
+    <!-- Social -->
+    <div class="footer__col">
+      <h4 class="footer__title">تابعنا على التواصل الاجتماعي</h4>
+
+      <div class="social">
+        <a class="social__btn" href="#" aria-label="Facebook"><img src="assets/images/face.png" alt="visa" /></a>
+        <a class="social__btn" href="#" aria-label="Instagram"><img src="assets/images/insta.png" alt="visa" /></a>
+        <a class="social__btn" href="#" aria-label="YouTube"><img src="assets/images/youtube.png" alt="visa" /></a>
+      </div>
+    </div>
+
+    <!-- Support -->
+    <div class="footer__col">
+      <h4 class="footer__title">الدعم</h4>
+      <ul class="footer__links">
+        <li><a href="#">تواصل معنا</a></li>
+        <li><a href="#">كيفية استخدام المنصة</a></li>
+        <li><a href="#">سياسة الإلغاء و الاسترجاع</a></li>
+      </ul>
+    </div>
+
+    <!-- Links -->
+    <div class="footer__col">
+      <h4 class="footer__title">الروابط</h4>
+      <ul class="footer__links">
+        <li><a href="#">المواد</a></li>
+        <li><a href="#">المعلمون</a></li>
+        <li><a href="#">من نحن</a></li>
+      </ul>
+    </div>
+
+    <!-- Logo + About -->
+    <div class="footer__col footer__brand">
+      <div>
+       <img src="assets/images/mainLogo.png" alt="logo" />
+      </div>
+      <p class="footer__about">
+        منصة تعليمية تفاعلية متطورة توفر أحدث الوسائل التكنولوجية لتسهيل
+        التعلم وتحقيق تفوق أبنائكم بسرعة
+      </p>
+    </div>
+
+  </div>
+  <div>
+     <div class="payments">
+      <img src="assets/images/mastercard.png" alt="mastercard" />
+        <img src="assets/images/visa.png" alt="visa" />
+        
+      </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container footer__bottom-grid">
+      <div class="footer__bottom-links">
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">الأحكام وشروط الاستخدام</a>
+      </div>
+
+      <div class="footer__copy">
+        جميع الحقوق الطبع والنشر محفوظة © 2026
+      </div>
+    </div>
+  </div>
+</footer>

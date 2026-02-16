@@ -1,0 +1,15 @@
+.header{
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+.header__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 14px 0;
+  gap: 16px;
+}
+.logo{ font-weight:800; color: var(--primary); }
+.menu{ display:flex; gap: 18px; font-weight:600; }
+.menu a{ padding: 8px 10px; border-radius: 10px; }
+.menu a:hover{ background:#f1f5f9; }

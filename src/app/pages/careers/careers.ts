@@ -1,8 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-
+import { LangService } from '../../services/lang';
 import { ApiService, Major } from '../../services/api';
+import { validate } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-careers',
@@ -14,6 +15,7 @@ import { ApiService, Major } from '../../services/api';
 export class CareersComponent implements OnInit {
   private fb = inject(FormBuilder);
   private api = inject(ApiService);
+lang = inject(LangService);
 
   majors: Major[] = [];
   loadingMajors = true;
@@ -24,7 +26,6 @@ export class CareersComponent implements OnInit {
   successMsg = '';
   errorMsg = '';
 
-  // عدّلي القيم حسب متطلبات الواجب إذا كانت محددة
   jobs = ['Developer', 'Designer', 'QA', 'Project Manager'];
   experienceOptions = ['0-1', '1-3', '3-5', '5+'];
 
@@ -34,6 +35,7 @@ export class CareersComponent implements OnInit {
     major_id: ['', [Validators.required]],
     name: ['', [Validators.required, Validators.maxLength(255)]],
     phone: ['', [Validators.required, Validators.maxLength(50)]],
+    email:['',[Validators.required,Validators.email]],
   });
 
   ngOnInit(): void {
@@ -73,7 +75,6 @@ export class CareersComponent implements OnInit {
       return;
     }
 
-    // (اختياري) تحقق نوع الملف من جهة العميل
     const allowedTypes = [
       'application/pdf',
       'application/msword',
@@ -90,6 +91,7 @@ export class CareersComponent implements OnInit {
     fd.append('major_id', String(this.form.value.major_id!));
     fd.append('name', this.form.value.name!);
     fd.append('phone', this.form.value.phone!);
+    fd.append('email', this.form.value.email!);
     fd.append('cv', this.selectedFile);
 
     this.submitting = true;
@@ -97,25 +99,23 @@ export class CareersComponent implements OnInit {
     this.api.submitCareer(fd).subscribe({
       next: (res) => {
         this.submitting = false;
-        this.successMsg = res?.message || 'Application submitted successfully.';
+        this.successMsg = res?.message || '✅ تم إرسال الطلب بنجاح. شكرًا لك!.';
         this.form.reset();
         this.selectedFile = null;
       },
       error: (err) => {
         this.submitting = false;
 
-        // Laravel validation عادة ترجع 422 مع errors
         const msg =
           err?.error?.message ||
           (err?.error?.errors ? this.flattenErrors(err.error.errors) : null) ||
-          'Submission failed. Please try again.';
+          '❌ حدث خطأ أثناء الإرسال. حاول مرة أخرى.';
 
         this.errorMsg = msg;
       },
     });
   }
 
-  // تستخدمها في HTML: isInvalid('phone') ...
   isInvalid(name: string): boolean {
     const c = this.form.get(name);
     return !!(c && c.invalid && (c.touched || c.dirty));
