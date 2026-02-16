@@ -1,0 +1,7 @@
+.page { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+.card { border: 1px solid #ddd; padding: 16px; border-radius: 10px; background: #fff; }
+.list { padding: 10px 0; border-bottom: 1px solid #eee; }
+.title { font-weight: 700; margin-bottom: 4px; }
+.muted { color: #666; }
+.alert { padding: 10px; border-radius: 8px; margin: 12px 0; }
+.alert.error { background: #ffe8e8; }

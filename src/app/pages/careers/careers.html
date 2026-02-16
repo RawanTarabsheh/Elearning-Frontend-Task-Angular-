@@ -1,0 +1,65 @@
+<div class="page">
+  <h2>Careers</h2>
+  <p class="muted">Submit your application and upload your CV.</p>
+
+  <div *ngIf="successMsg" class="alert success">{{ successMsg }}</div>
+  <div *ngIf="errorMsg" class="alert error">{{ errorMsg }}</div>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="card">
+    <div class="grid">
+      <div class="field">
+        <label>Job *</label>
+        <select [formControl]="form.controls.job">
+          <option value="">-- Select --</option>
+          <option *ngFor="let j of jobs" [value]="j">{{ j }}</option>
+        </select>
+        <small *ngIf="isInvalid('job')">Job is required.</small>
+      </div>
+
+      <div class="field">
+        <label>Years of Experience *</label>
+        <select [formControl]="form.controls.years_of_experience">
+          <option value="">-- Select --</option>
+          <option *ngFor="let y of experienceOptions" [value]="y">{{ y }}</option>
+        </select>
+        <small *ngIf="isInvalid('years_of_experience')">This field is required.</small>
+      </div>
+
+      <div class="field">
+        <label>Major *</label>
+        <select [formControl]="form.controls.major_id" [disabled]="loadingMajors">
+          <option value="">{{ loadingMajors ? 'Loading...' : '-- Select --' }}</option>
+          <option *ngFor="let m of majors" [value]="m.id">
+            {{ m.name_en }} / {{ m.name_ar }}
+          </option>
+        </select>
+        <small *ngIf="isInvalid('major_id')">Major is required.</small>
+      </div>
+
+      <div class="field">
+        <label>Name *</label>
+        <input type="text" [formControl]="form.controls.name" placeholder="Your full name" />
+        <small *ngIf="isInvalid('name')">Name is required.</small>
+      </div>
+
+      <div class="field">
+        <label>Phone *</label>
+        <input type="text" [formControl]="form.controls.phone" placeholder="079..." />
+        <small *ngIf="isInvalid('phone')">Phone is required.</small>
+      </div>
+
+      <div class="field">
+        <label>CV (PDF/DOC/DOCX) *</label>
+        <input type="file" (change)="onFileChange($event)" accept=".pdf,.doc,.docx" />
+        <small *ngIf="!selectedFile">Please attach a CV file.</small>
+        <small *ngIf="selectedFile">Selected: {{ selectedFile.name }}</small>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" [disabled]="submitting">
+        {{ submitting ? 'Submitting...' : 'Submit' }}
+      </button>
+    </div>
+  </form>
+</div>

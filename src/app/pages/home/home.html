@@ -1,0 +1,29 @@
+<div class="page">
+  <h2>Home</h2>
+
+  <div *ngIf="loading" class="muted">Loading...</div>
+  <div *ngIf="!loading && errorMsg" class="alert error">{{ errorMsg }}</div>
+
+  <ng-container *ngIf="!loading && !errorMsg">
+    <section class="card">
+      <h3>Latest News</h3>
+      <div *ngIf="news.length === 0" class="muted">No news yet.</div>
+
+      <div class="list" *ngFor="let n of news">
+        <div class="title">{{ n.title_en }} / {{ n.title_ar }}</div>
+        <div class="muted">{{ n.content_en }}</div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top: 12px;">
+      <h3>Testimonials</h3>
+      <div *ngIf="testimonials.length === 0" class="muted">No testimonials yet.</div>
+
+      <div class="list" *ngFor="let t of testimonials">
+        <div class="title">{{ t.name_en }} / {{ t.name_ar }}</div>
+        <div class="muted">{{ t.title_en }} / {{ t.title_ar }}</div>
+        <div>{{ t.content_en }}</div>
+      </div>
+    </section>
+  </ng-container>
+</div>
